@@ -33,7 +33,7 @@ namespace ODataOrders
             services.AddDbContext<ODataOrdersContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddControllers().AddOData(opt => opt.Filter().Expand().Select().OrderBy()
+            services.AddControllers().AddOData(opt => opt.Filter().Expand().Select().OrderBy().Count()
                 .AddRouteComponents("odata", GetEdmModel()));
         }
 
