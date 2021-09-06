@@ -30,8 +30,10 @@ namespace ODataOrders
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ODataOrdersContext>(options => options.UseSqlServer(
-                Configuration["ConnectionStrings:DefaultConnection"]));
+            //services.AddDbContext<ODataOrdersContext>(options => options.UseSqlServer(
+            //    Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddScoped<Repository>();
 
             services.AddControllers().AddOData(opt => opt.Filter().Expand().Select().OrderBy().Count()
                 .AddRouteComponents("odata", GetEdmModel()));

@@ -17,7 +17,7 @@ namespace ODataOrders.Data
         
         public int Quantity { get; set; }
         
-        public int Revenue { get; set; }
+        public int Price { get; set; }
         
         public int CustomerId { get; set; }
         
