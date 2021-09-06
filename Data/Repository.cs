@@ -10,7 +10,7 @@ namespace ODataOrders.Data
     public class Repository
     {
         public List<Customer> Customers { get; set; }
-        private Order[] _orders;
+        private readonly Order[] _orders;
 
         public Repository()
         {
@@ -40,32 +40,6 @@ namespace ODataOrders.Data
                 }
             }
         }
-        #endregion
-
-        #region Data
-        private List<string> demoCustomers = new()
-        {
-            "Foo",
-            "Bar",
-            "Acme",
-            "King of Tech",
-            "Awesomeness"
-        };
-
-        private readonly List<string> demoProducts = new()
-        {
-            "Bike",
-            "Car",
-            "Apple",
-            "Spaceship"
-        };
-
-        private readonly List<string> demoCountries = new()
-        {
-            "AT",
-            "DE",
-            "CH"
-        };
         #endregion
     }
 }
