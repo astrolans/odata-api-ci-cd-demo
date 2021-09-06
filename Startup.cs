@@ -35,7 +35,7 @@ namespace ODataOrders
 
             services.AddScoped<Repository>();
 
-            services.AddControllers().AddOData(opt => opt.Filter().Expand().Select().OrderBy().Count()
+            services.AddControllers().AddOData(opt => opt.Filter().Expand().Select().OrderBy().Count().SetMaxTop(500)
                 .AddRouteComponents("odata", GetEdmModel()));
         }
 

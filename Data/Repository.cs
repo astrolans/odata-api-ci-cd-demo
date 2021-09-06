@@ -10,23 +10,25 @@ namespace ODataOrders.Data
     public class Repository
     {
         public List<Customer> Customers { get; set; }
-        private readonly Order[] _orders;
+        
+        private List<Order> Orders { get; set; }
 
         public Repository()
+        {
+            LoadData();
+            Fill();
+        }
+
+        private void LoadData()
         {
             var customersFile = File.ReadAllText("customers.json");
             var ordersFile = File.ReadAllText("orders.json");
 
             Customers = JsonSerializer.Deserialize<Customer[]>(customersFile).ToList();
-            _orders = JsonSerializer.Deserialize<Order[]>(ordersFile);
+            Orders = JsonSerializer.Deserialize<Order[]>(ordersFile).ToList();
         }
 
-        #region Seed database
-        /// <summary>
-        /// <strike>Seed data to localDb.</strike>
-        /// </summary>
-        /// <returns>Http status code 200</returns>
-        public void Fill()
+        private void Fill()
         {
             Random rand = new();
 
@@ -34,12 +36,12 @@ namespace ODataOrders.Data
             {
                 for (int i = 0; i < rand.Next(1, 11); i++)
                 {
-                    int k = rand.Next(_orders.Length);
-                    customer.Orders.Add(_orders[k]);
-                    _orders[k].CustomerId = customer.Id;
+                    int k = rand.Next(Orders.Count);
+                    if (Orders[k].CustomerId != 0) continue;
+                    customer.Orders.Add(Orders[k]);
+                    Orders[k].CustomerId = customer.Id;
                 }
             }
         }
-        #endregion
     }
 }
