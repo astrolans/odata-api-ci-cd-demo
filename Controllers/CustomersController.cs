@@ -13,83 +13,20 @@ namespace ODataOrders.Controllers
 {
     public class CustomersController : ODataController
     {
-        private readonly ODataOrdersContext context;
+        private readonly Repository repo;
 
-        public CustomersController(ODataOrdersContext context)
+        public CustomersController(Repository repo)
         {
-            this.context = context;
+            this.repo = repo;
         }
 
         [EnableQuery]
-        public IActionResult Get() => Ok(context.Customers);
+        public IActionResult Get() => Ok(repo.Customers);
 
         public IActionResult Post([FromBody] Customer c)
         {
-            context.Customers.Add(c);
-            context.SaveChanges();
+            repo.Customers.Add(c);
             return Ok(c);
         }
-
-        /// <summary>
-        /// Seed data to localDb.
-        /// </summary>
-        /// <returns>Http status code 200</returns>
-        [HttpPost]
-        [Route("fill")]
-        public async Task<IActionResult> Fill()
-        {
-            Random rand = new();
-
-            for (int i = 0; i < 10; i++)
-            {
-                Customer c = new()
-                {
-                    CustomerName = demoCustomers[rand.Next(demoCustomers.Count)],
-                    CountryId = demoCountries[rand.Next(demoCountries.Count)]
-                };
-                await context.Customers.AddAsync(c);
-
-                for (int j = 0; j < 10; j++)
-                {
-                    Order o = new()
-                    {
-                        OrderDate = DateTime.Today,
-                        Product = demoProducts[rand.Next(demoProducts.Count)],
-                        Quantity = rand.Next(1, 5),
-                        Revenue = rand.Next(100, 5000),
-                        Customer = c
-                    };
-                    await context.Orders.AddAsync(o);
-                }
-            }
-            await context.SaveChangesAsync();
-            return Ok();
-        }
-
-        #region Data
-        private List<string> demoCustomers = new()
-        {
-            "Foo",
-            "Bar",
-            "Acme",
-            "King of Tech",
-            "Awesomeness"
-        };
-
-        private readonly List<string> demoProducts = new()
-        {
-            "Bike",
-            "Car",
-            "Apple",
-            "Spaceship"
-        };
-
-        private readonly List<string> demoCountries = new()
-        {
-            "AT",
-            "DE",
-            "CH"
-        };
-        #endregion
     }
 }
