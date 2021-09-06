@@ -17,6 +17,6 @@ namespace ODataOrders.Data
 
         public string Gender { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; } = new();
     }
 }
