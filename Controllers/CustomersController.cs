@@ -11,13 +11,6 @@ using System.Threading.Tasks;
 
 namespace ODataOrders.Controllers
 {
-    // Not needed with OData
-    //[Route("api/[controller]")]
-    //[ApiController]
-
-    // ControllerBase not needed w/ OData
-    //public class CustomersController : ControllerBase
-
     public class CustomersController : ODataController
     {
         private readonly ODataOrdersContext context;
@@ -27,16 +20,10 @@ namespace ODataOrders.Controllers
             this.context = context;
         }
 
-        // Change attribute, remove async, Task and await.
-        // Not returning a List, but a reference to Customers (DbSet).
-        // OData in charge of builder the query (the client in charge?)
-
-        //[HttpGet]
         [EnableQuery]
         public IActionResult Get() => Ok(context.Customers);
 
-        //[HttpPost]
-        public IActionResult Add([FromBody] Customer c)
+        public IActionResult Post([FromBody] Customer c)
         {
             context.Customers.Add(c);
             context.SaveChanges();
