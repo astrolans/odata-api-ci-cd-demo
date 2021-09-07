@@ -63,6 +63,7 @@ namespace ODataOrders
         {
             var builder = new ODataConventionModelBuilder();
             builder.EntitySet<Customer>("Customers");  // arg has to be same name as the Controller
+            builder.EntitySet<Order>("Orders");
             return builder.GetEdmModel();
         }
     }
