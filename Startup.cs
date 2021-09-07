@@ -51,6 +51,9 @@ namespace ODataOrders
 
             app.UseRouting();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

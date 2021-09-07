@@ -20,7 +20,7 @@
     "ODataOrders": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "odata/customers",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
