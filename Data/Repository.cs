@@ -11,7 +11,7 @@ namespace ODataOrders.Data
     {
         public List<Customer> Customers { get; set; }
         
-        private List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
         public Repository()
         {
