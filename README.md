@@ -1,4 +1,4 @@
-# API Demo Test with OData
+# API Demo with OData
 
 [![Continuous Integration and Deployment](https://github.com/astrolans/odata-demo-test/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/astrolans/odata-demo-test/actions/workflows/ci-cd.yaml)
 
